@@ -1,17 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://be312xxq6hhiv"]
+[gd_scene load_steps=5 format=3 uid="uid://be312xxq6hhiv"]
 
 [ext_resource type="Script" path="res://scripts/LabelComponent.cs" id="1_c7n7i"]
 [ext_resource type="Script" path="res://scripts/Clock.cs" id="1_w8euy"]
 [ext_resource type="Script" path="res://scripts/TimerComponent.cs" id="2_xydp7"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ogmvg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_snei4"]
 font_size = 144
 font_color = Color(1, 0, 1, 1)
 
 [node name="Clock" type="Control" node_paths=PackedStringArray("label", "timer")]
-material = SubResource("CanvasItemMaterial_ogmvg")
 custom_minimum_size = Vector2(576, 120)
 layout_mode = 3
 anchors_preset = 8

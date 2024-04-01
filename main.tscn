@@ -8,6 +8,7 @@ script = ExtResource("1_mxvcc")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 top_level = true
+light_mask = 0
 custom_minimum_size = Vector2(300, 100)
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,12 +18,6 @@ grow_vertical = 2
 
 [node name="Clock" parent="CenterContainer" instance=ExtResource("1_egds5")]
 layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(726, 270)
-offset_right = 726.0
-offset_bottom = 270.0
-color = Color(1, 1, 1, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(363, 135)
