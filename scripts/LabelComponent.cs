@@ -1,6 +1,8 @@
 using Godot;
 
-public partial class ClockLabel : Label
+namespace Clock
+{
+public partial class LabelComponent : Label
 {
 	public float startTime = 3600f;
 	public float currentTime;
@@ -41,4 +43,5 @@ public partial class ClockLabel : Label
 	{
 		DecrementTimer();
 	}
+}
 }

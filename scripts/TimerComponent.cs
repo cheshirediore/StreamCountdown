@@ -1,19 +1,15 @@
 using Godot;
-using System;
+
 
 namespace Clock
 {
-public partial class Clock : Node2D
+public partial class TimerComponent : Timer
 {
-	[Export] 
-	private LabelComponent label;
-
-	[Export]
-	private TimerComponent timer;
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		this.WaitTime = 1.0f;
+		this.Start();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,5 +17,9 @@ public partial class Clock : Node2D
 	{
 	}
 
+	public void TogglePause()
+	{
+		this.Paused = !this.Paused;
+	}
 }
 }
