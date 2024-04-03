@@ -1,4 +1,6 @@
+using System;
 using System.Security.AccessControl;
+using System.Threading;
 using Godot;
 
 namespace Clock
@@ -7,12 +9,46 @@ public partial class LabelComponent : Label
 {
 	public float startTime = 3600f;
 	public float currentTime;
-	private bool running = true;
+	private bool running = false;
 	private Utility.ClockFormat clockFormat;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+		UpdateUI();
+	}
+
+	private void DecrementTimer()
+	{
+		this.currentTime--;
+	}
+
+	private void UpdateUI()
+	{
+		this.Text = Utility.ClockStringFromFloat(this.currentTime, this.clockFormat); // TODO: Fix UI to be wide enough for DAYS
+	}
+
+	public void _on_timer_timeout()
+	{
+		// If the clock is running, update the label
+		// NOTE: This is independent of the timer component running. The timer component always runs as a heartbeat,
+		//		 and this component just hooks in when it needs time info.
+		if (this.running)
+		{
+			DecrementTimer();
+		}
+	}
+
+	private void Start()
+	{
+		this.running = true;
+
 		// Initialize the clock to the start time
 		this.currentTime = startTime;
 
@@ -46,41 +82,11 @@ public partial class LabelComponent : Label
 		UpdateUI();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public void Start(float time)
 	{
-		UpdateUI();
+		this.startTime = time;
+		this.Start();
 	}
 
-	private void DecrementTimer()
-	{
-		this.currentTime--;
-	}
-
-	private void UpdateUI()
-	{
-		this.Text = Utility.ClockStringFromFloat(this.currentTime, this.clockFormat); // TODO: Fix UI to be wide enough for DAYS
-	}
-
-	public void _on_timer_timeout()
-	{
-		// If the clock is running, update the label
-		// NOTE: This is independent of the timer component running. The timer component always runs as a heartbeat,
-		//		 and this component just hooks in when it needs time info.
-		if (this.running)
-		{
-			DecrementTimer();
-		}
-	}
-
-	public void Start()
-	{
-	
-	}
-
-	public void DelayedStart(float delaySeconds)
-	{
-		
-	}
 }
 }
