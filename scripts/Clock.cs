@@ -21,5 +21,10 @@ public partial class Clock : Control
 	{
 	}
 
+	public void StartCountdown(float time)
+	{
+		label.Start(time);
+	}
+
 }
 }
