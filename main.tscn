@@ -1,91 +1,135 @@
-[gd_scene load_steps=4 format=3 uid="uid://coimxc8gm2eyw"]
+[gd_scene load_steps=5 format=3 uid="uid://coimxc8gm2eyw"]
 
 [ext_resource type="PackedScene" uid="uid://be312xxq6hhiv" path="res://clock.tscn" id="1_egds5"]
 [ext_resource type="Script" path="res://scripts/Main.cs" id="1_mxvcc"]
 [ext_resource type="Script" path="res://scripts/UIController.cs" id="2_1uino"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xq6rt"]
+bg_color = Color(0.6, 0.6, 1, 1)
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_mxvcc")
 
-[node name="CenterContainer" type="CenterContainer" parent="." node_paths=PackedStringArray("configurationMenu", "days", "hours", "minutes", "seconds", "clockUI", "clockController")]
+[node name="CenterContainer" type="CenterContainer" parent="." node_paths=PackedStringArray("configurationMenu", "clockUI", "days", "hours", "minutes", "seconds", "clockController")]
 top_level = true
 light_mask = 0
-custom_minimum_size = Vector2(300, 100)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_1uino")
-configurationMenu = NodePath("ConfigurationMenu")
-days = NodePath("ConfigurationMenu/HBoxContainer/DaysContainer/TextEdit")
-hours = NodePath("ConfigurationMenu/HBoxContainer/HoursContainer/TextEdit")
-minutes = NodePath("ConfigurationMenu/HBoxContainer/MinutesContainer/TextEdit")
-seconds = NodePath("ConfigurationMenu/HBoxContainer/SecondsContainer/TextEdit")
-clockUI = NodePath("Clock")
-clockController = NodePath("Clock")
+configurationMenu = NodePath("MenuParent")
+clockUI = NodePath("ClockParent")
+days = NodePath("MenuParent/VBoxContainer/HBoxContainer/DaysContainer/TextEdit")
+hours = NodePath("MenuParent/VBoxContainer/HBoxContainer/HoursContainer/TextEdit")
+minutes = NodePath("MenuParent/VBoxContainer/HBoxContainer/MinutesContainer/TextEdit")
+seconds = NodePath("MenuParent/VBoxContainer/HBoxContainer/SecondsContainer/TextEdit")
+clockController = NodePath("ClockParent/Clock")
 
-[node name="Clock" parent="CenterContainer" instance=ExtResource("1_egds5")]
+[node name="ClockParent" type="Control" parent="CenterContainer"]
 visible = false
 layout_mode = 2
 
-[node name="ConfigurationMenu" type="VBoxContainer" parent="CenterContainer"]
+[node name="Clock" parent="CenterContainer/ClockParent" instance=ExtResource("1_egds5")]
+layout_mode = 2
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -288.0
+offset_top = -60.0
+offset_right = 288.0
+offset_bottom = 60.0
+
+[node name="MenuParent" type="Control" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/ConfigurationMenu"]
+[node name="Panel" type="Panel" parent="CenterContainer/MenuParent"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -363.0
+offset_top = -135.0
+offset_right = 363.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xq6rt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MenuParent"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -117.5
+offset_top = -43.0
+offset_right = 117.5
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MenuParent/VBoxContainer"]
 layout_mode = 2
 
-[node name="DaysContainer" type="VBoxContainer" parent="CenterContainer/ConfigurationMenu/HBoxContainer"]
+[node name="DaysContainer" type="VBoxContainer" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/ConfigurationMenu/HBoxContainer/DaysContainer"]
+[node name="Label" type="Label" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer/DaysContainer"]
 layout_mode = 2
 text = "Days"
 
-[node name="TextEdit" type="TextEdit" parent="CenterContainer/ConfigurationMenu/HBoxContainer/DaysContainer"]
+[node name="TextEdit" type="TextEdit" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer/DaysContainer"]
 custom_minimum_size = Vector2(48, 24)
 layout_mode = 2
 placeholder_text = "00"
 
-[node name="HoursContainer" type="VBoxContainer" parent="CenterContainer/ConfigurationMenu/HBoxContainer"]
+[node name="HoursContainer" type="VBoxContainer" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/ConfigurationMenu/HBoxContainer/HoursContainer"]
+[node name="Label" type="Label" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer/HoursContainer"]
 layout_mode = 2
 text = "Hours"
 
-[node name="TextEdit" type="TextEdit" parent="CenterContainer/ConfigurationMenu/HBoxContainer/HoursContainer"]
+[node name="TextEdit" type="TextEdit" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer/HoursContainer"]
 custom_minimum_size = Vector2(48, 24)
 layout_mode = 2
 placeholder_text = "00"
 
-[node name="MinutesContainer" type="VBoxContainer" parent="CenterContainer/ConfigurationMenu/HBoxContainer"]
+[node name="MinutesContainer" type="VBoxContainer" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/ConfigurationMenu/HBoxContainer/MinutesContainer"]
+[node name="Label" type="Label" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer/MinutesContainer"]
 layout_mode = 2
 text = "Minutes"
 
-[node name="TextEdit" type="TextEdit" parent="CenterContainer/ConfigurationMenu/HBoxContainer/MinutesContainer"]
+[node name="TextEdit" type="TextEdit" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer/MinutesContainer"]
 custom_minimum_size = Vector2(48, 24)
 layout_mode = 2
 placeholder_text = "00"
 
-[node name="SecondsContainer" type="VBoxContainer" parent="CenterContainer/ConfigurationMenu/HBoxContainer"]
+[node name="SecondsContainer" type="VBoxContainer" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/ConfigurationMenu/HBoxContainer/SecondsContainer"]
+[node name="Label" type="Label" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer/SecondsContainer"]
 layout_mode = 2
 text = "Seconds"
 
-[node name="TextEdit" type="TextEdit" parent="CenterContainer/ConfigurationMenu/HBoxContainer/SecondsContainer"]
+[node name="TextEdit" type="TextEdit" parent="CenterContainer/MenuParent/VBoxContainer/HBoxContainer/SecondsContainer"]
 custom_minimum_size = Vector2(48, 24)
 layout_mode = 2
 placeholder_text = "00"
 caret_blink = true
 
-[node name="StartButton" type="Button" parent="CenterContainer/ConfigurationMenu"]
+[node name="StartButton" type="Button" parent="CenterContainer/MenuParent/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "Start"
 
-[connection signal="pressed" from="CenterContainer/ConfigurationMenu/StartButton" to="CenterContainer" method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/MenuParent/VBoxContainer/StartButton" to="CenterContainer" method="_on_start_button_pressed"]

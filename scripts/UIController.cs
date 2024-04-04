@@ -3,9 +3,15 @@ using System;
 
 public partial class UIController : CenterContainer
 {
+	[ExportGroup("Visibility Parents")]
 	[Export]
 	Control configurationMenu;
 
+	[Export]
+	Control clockUI;
+
+
+	[ExportGroup("Text Edit Fields")]
 	[Export]
 	TextEdit days;
 
@@ -18,8 +24,8 @@ public partial class UIController : CenterContainer
 	[Export]
 	TextEdit seconds;
 
-	[Export]
-	Control clockUI;
+	
+	[ExportGroup("Sub-Controllers")]
 	[Export]
 	Clock.Clock clockController;
 
